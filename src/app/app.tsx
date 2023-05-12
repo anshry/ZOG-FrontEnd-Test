@@ -1,13 +1,17 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+import Login from 'src/components/login/login';
 import styles from './app.module.scss';
 
-import NxWelcome from './nx-welcome';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+// Create a client
+const queryClient = new QueryClient();
 
 export function App() {
   return (
-    <div>
-      <NxWelcome title="login-app" />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <Login />
+    </QueryClientProvider>
   );
 }
 

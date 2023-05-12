@@ -38,35 +38,27 @@ export default function LoginForm({}: Props) {
       sx={{
         alignItems: 'center',
         display: 'flex',
-        padding: '3rem',
-        backgroundColor: '#f6f9fb',
         height: '100%',
       }}
+      padding={{ xs: '1rem', md: '3rem' }}
     >
       <Grid container justifyContent="center">
         <Grid item xs={12}>
           <Box sx={{ maxWidth: 600, margin: 'auto' }}>
             <h1
-              style={{ marginBottom: 0, color: '#2663a4', fontSize: '2.5rem' }}
+              style={{ marginBottom: 0, color: '#2663a4', textAlign: 'left' }}
+              className="form-title"
             >
               Welcome back
             </h1>
-            <h2
-              style={{
-                marginBottom: 36,
-                marginTop: 8,
-                fontSize: 22,
-                color: '#66758a',
-              }}
-            >
-              Sign in to continue
-            </h2>
+            <h2 className="subtitle">Sign in to continue</h2>
           </Box>
         </Grid>
         <Grid item xs={12}>
           <Paper
             elevation={2}
-            sx={{ padding: 4, borderRadius: 3, maxWidth: 600, margin: 'auto' }}
+            sx={{ borderRadius: 1.75 }}
+            className="login-form"
           >
             <form
               onSubmit={(e) => {
@@ -78,7 +70,10 @@ export default function LoginForm({}: Props) {
               <Grid spacing={0} container>
                 <Grid item xs={12} marginBottom={3}>
                   <FormControl sx={{ width: '100%' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">
+                    <InputLabel
+                      htmlFor="outlined-adornment-password"
+                      size="small"
+                    >
                       Email
                     </InputLabel>
                     <OutlinedInput
@@ -86,6 +81,7 @@ export default function LoginForm({}: Props) {
                       type="email"
                       label="Email"
                       value={state.Email}
+                      size="small"
                       onChange={(e) =>
                         setState({ ...state, Email: e.target.value })
                       }
@@ -94,13 +90,17 @@ export default function LoginForm({}: Props) {
                 </Grid>
                 <Grid item xs={12} marginBottom={1} sx={{ paddingBottom: 0 }}>
                   <FormControl sx={{ width: '100%' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">
+                    <InputLabel
+                      htmlFor="outlined-adornment-password"
+                      size="small"
+                    >
                       Password
                     </InputLabel>
                     <OutlinedInput
                       id="outlined-adornment-password"
                       type={showPassword ? 'text' : 'password'}
                       value={state.Password}
+                      size="small"
                       onChange={(e) =>
                         setState({ ...state, Password: e.target.value })
                       }
@@ -120,13 +120,17 @@ export default function LoginForm({}: Props) {
                     />
                   </FormControl>
                 </Grid>
-                <Grid item xs={12} sx={{ paddingTop: 0, marginBottom: 3 }}>
+                <Grid
+                  item
+                  xs={12}
+                  sx={{ paddingTop: 0 }}
+                  marginBottom={{ xs: 1.5, md: 3 }}
+                >
                   <Button
                     sx={{
-                      padding: 0,
-                      fontSize: '14px',
                       textTransform: 'none',
                     }}
+                    className="btn-forgot-password"
                   >
                     Forgot password?
                   </Button>
@@ -136,15 +140,15 @@ export default function LoginForm({}: Props) {
                   xs={9}
                   sx={{ display: 'flex', alignItems: 'center' }}
                 >
-                  <p style={{ fontSize: '14px' }}>
+                  <p className="text-new-user">
                     New user?
                     <Button
                       sx={{
                         marginLeft: 0.8,
                         padding: 0,
-                        fontSize: '14px',
                         textTransform: 'none',
                       }}
+                      className="text-new-user"
                     >
                       Create Account
                     </Button>
@@ -158,6 +162,7 @@ export default function LoginForm({}: Props) {
                       width: '100%',
                       padding: '.5rem',
                     }}
+                    className="btn-small"
                     type="submit"
                     disabled={isLoading}
                     variant="contained"

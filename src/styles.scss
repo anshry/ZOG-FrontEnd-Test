@@ -7,3 +7,106 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+body{
+    background-color: #f6f9fb;
+}
+
+.brand{
+    font-size: 14px;
+    color: white;
+    position: absolute;
+    top: .5rem;
+    left: 1.5rem;
+ 
+    @media screen and (min-width: 768px){
+        font-size: 22px;
+        top: 1.5rem;
+        left: 3.5rem;
+    }
+}
+
+.content-title{
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    margin-top: 5rem;
+    @media screen and (min-width: 768px){
+        font-size: 2.5rem;
+        margin-bottom: 6px; 
+        margin-top: 0;
+    }
+}
+
+.form-title{
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    @media screen and (min-width: 768px){
+        font-size: 2.5rem;
+        margin-bottom: 6px; 
+        margin-top: 0;
+    }
+}
+
+.subtitle{
+    font-size: 14px;
+    color: #66758a;
+    margin-bottom: 16px;
+    margin-top: 2px;
+ 
+    @media screen and (min-width: 768px){
+        font-size: 22px;
+        margin-bottom: 36px;
+        margin-top: 8px;
+    }
+}
+
+.top-content{
+    text-align: center; 
+    color: white;
+    font-size: small;
+
+    @media screen and (min-width: 768px){
+        font-size: medium;
+    }
+}
+
+.login-form{
+    padding: 15px;
+    margin-top: 0;
+    @media screen and (min-width: 768px){
+        padding: 35px; 
+        max-width: 600px;
+        margin: auto;
+    }
+}
+
+.btn-forgot-password{
+    font-size: 12px !important;
+    padding: 0 !important;
+
+    @media screen and (min-width: 768px){
+        font-size: 14px !important; 
+    }
+}
+
+.text-new-user{
+    font-size: 12px !important;
+
+    @media screen and (min-width: 768px){
+        font-size: 14px !important;;
+    }
+}
+
+.btn-small{
+    font-size: x-small !important;
+
+    @media screen and (min-width: 768px){
+        width: 225px;
+        font-size: small !important;
+        padding: .5rem !important;
+    }
+}
+
+

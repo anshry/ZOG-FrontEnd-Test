@@ -1,6 +1,5 @@
 import { Box, Button, Grid } from '@mui/material';
 import { OpenInNew } from '@mui/icons-material';
-import React from 'react';
 
 export default function LoginContent() {
   return (
@@ -8,40 +7,23 @@ export default function LoginContent() {
       sx={{
         alignItems: 'center',
         display: 'flex',
-        padding: '3rem',
         backgroundColor: '#2663a4',
         height: '100%',
         position: 'relative',
       }}
+      padding={{ xs: '1rem 1rem 5rem', md: '3rem' }}
     >
-      <h5
-        style={{
-          color: 'white',
-          position: 'absolute',
-          top: '1.5rem',
-          left: '3.5rem',
-          fontSize: 22,
-        }}
-      >
-        Envelope
-      </h5>
+      <h5 className="brand">Envelope</h5>
       <Grid container justifyContent="center" alignItems="center">
         <Grid item xs={12} marginBottom={2}>
-          <h1
-            style={{
-              textAlign: 'center',
-              color: 'white',
-              fontSize: '2.5rem',
-              marginBottom: 6,
-            }}
-          >
+          <h1 className="content-title">
             Introducing our
             <br />
             2020 report
           </h1>
         </Grid>
         <Grid item xs={12} marginBottom={2}>
-          <p style={{ textAlign: 'center', color: 'white' }}>
+          <p className="top-content">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum cum
             soluta nisi officiis
           </p>
@@ -50,12 +32,11 @@ export default function LoginContent() {
           <Button
             variant="outlined"
             endIcon={<OpenInNew fontSize="small" />}
+            className="btn-small"
             sx={{
               textTransform: 'none',
               color: 'white',
               borderColor: 'white',
-              width: '55%',
-              maxWidth: '60%',
             }}
           >
             View Report

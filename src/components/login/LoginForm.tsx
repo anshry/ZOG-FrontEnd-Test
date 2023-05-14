@@ -76,10 +76,12 @@ export default function LoginForm() {
       };
 
       await mutate(data);
-    } catch (error: any) {
-      setSnackbarMessage(error.message);
-      setSnackbarOpen(true);
-    }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setSnackbarMessage(error.message);
+        setSnackbarOpen(true);
+      }
+    }    
   };
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);

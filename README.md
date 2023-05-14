@@ -49,6 +49,13 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 To run the tests, execute:
 ```npm test```
 
+## Login Response
+
+To receive a successful login response, users can enter the following credentials:
+
+- Email: Any valid email address
+- Password: `p@s$w0rd`
+
 ## Linting
 
 To lint the project, run:

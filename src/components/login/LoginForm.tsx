@@ -56,11 +56,21 @@ export default function LoginForm() {
     event.preventDefault();
   };
 
+  const isValidEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { email, password } = state;
 
-    const emailError = email.trim() === '' ? 'Email is required' : '';
+    const emailError =
+      email.trim() === ''
+        ? 'Email is required'
+        : !isValidEmail(email)
+        ? 'Invalid email address'
+        : '';
     const passwordError = password.trim() === '' ? 'Password is required' : '';
 
     setEmailError(emailError);

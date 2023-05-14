@@ -51,4 +51,26 @@ describe('LoginForm', () => {
       within(container).queryByText('Invalid password')
     ).toBeInTheDocument();
   });
+
+  // New test case for invalid email
+  test('shows error message for invalid email', async () => {
+    const { getByLabelText, getByRole, container } = render(<LoginForm />);
+
+    fireEvent.change(getByLabelText('Email'), {
+      target: { value: 'a@a' },
+    });
+    fireEvent.change(getByLabelText('Password'), {
+      target: { value: 'p@s$w0rd' },
+    });
+
+    const submitButton = getByRole('button', { name: /Sign in/i });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => within(container).findByText('Invalid email address'), {
+      timeout: 5000,
+    });
+    expect(
+      within(container).queryByText('Invalid email address')
+    ).toBeInTheDocument();
+  });
 });

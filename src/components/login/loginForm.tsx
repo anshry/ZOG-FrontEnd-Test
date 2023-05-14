@@ -3,38 +3,96 @@ import {
   Box,
   Button,
   FormControl,
+  FormHelperText,
   Grid,
   IconButton,
   InputAdornment,
   InputLabel,
   OutlinedInput,
   Paper,
+  Snackbar,
 } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 
-type Props = {};
+export async function loginMock(data: { password: string }) {
+  // Simulate a delay to mimic the network request
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  const { password } = data;
 
-export default function LoginForm({}: Props) {
+  if (password === 'p@s$w0rd') {
+    return { message: 'Login successful' };
+  } else {
+    throw new Error('Invalid password');
+  }
+}
+
+export default function LoginForm() {
   const queryClient = useQueryClient();
-  const { mutate, isLoading } = useMutation(
-    (data: any) => fetch('/api/login', { method: 'POST', body: data }),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('user');
-      },
-    }
-  );
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [state, setState] = React.useState({ Email: '', Password: '' });
+  const { mutate, isLoading } = useMutation(loginMock, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries('user');
+      setSnackbarMessage(data.message);
+      setSnackbarOpen(true);
+    },
+    onError: (error: Error) => {
+      setSnackbarMessage(error.message);
+      setSnackbarOpen(true);
+    },
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [state, setState] = useState({ email: '', password: '' });
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [submitClicked, setSubmitClicked] = useState(false);
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
   };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const { email, password } = state;
+
+    const emailError = email.trim() === '' ? 'Email is required' : '';
+    const passwordError = password.trim() === '' ? 'Password is required' : '';
+
+    setEmailError(emailError);
+    setPasswordError(passwordError);
+    setSubmitClicked(true);
+
+    if (emailError || passwordError) {
+      return;
+    }
+
+    try {
+      const data = {
+        email,
+        password,
+      };
+
+      await mutate(data);
+    } catch (error: any) {
+      setSnackbarMessage(error.message);
+      setSnackbarOpen(true);
+    }
+  };
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
+    setSnackbarMessage('');
+  };
+
   return (
     <Box
+      data-testid="login-form"
       sx={{
         alignItems: 'center',
         display: 'flex',
@@ -60,36 +118,38 @@ export default function LoginForm({}: Props) {
             sx={{ borderRadius: 1.75 }}
             className="login-form"
           >
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                const data = new FormData(e.currentTarget);
-                mutate(data);
-              }}
-            >
+            <form onSubmit={handleSubmit}>
               <Grid spacing={0} container>
                 <Grid item xs={12} marginBottom={3}>
-                  <FormControl sx={{ width: '100%' }} variant="outlined">
-                    <InputLabel
-                      htmlFor="outlined-adornment-password"
-                      size="small"
-                    >
+                  <FormControl
+                    sx={{ width: '100%' }}
+                    variant="outlined"
+                    error={submitClicked && !!emailError}
+                  >
+                    <InputLabel htmlFor="outlined-adornment-email" size="small">
                       Email
                     </InputLabel>
                     <OutlinedInput
-                      id="outlined"
+                      id="outlined-adornment-email"
                       type="email"
                       label="Email"
-                      value={state.Email}
+                      value={state.email}
                       size="small"
                       onChange={(e) =>
-                        setState({ ...state, Email: e.target.value })
+                        setState({ ...state, email: e.target.value })
                       }
                     />
+                    {submitClicked && emailError && (
+                      <FormHelperText>{emailError}</FormHelperText>
+                    )}
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} marginBottom={1} sx={{ paddingBottom: 0 }}>
-                  <FormControl sx={{ width: '100%' }} variant="outlined">
+                  <FormControl
+                    sx={{ width: '100%' }}
+                    variant="outlined"
+                    error={submitClicked && !!passwordError}
+                  >
                     <InputLabel
                       htmlFor="outlined-adornment-password"
                       size="small"
@@ -99,10 +159,10 @@ export default function LoginForm({}: Props) {
                     <OutlinedInput
                       id="outlined-adornment-password"
                       type={showPassword ? 'text' : 'password'}
-                      value={state.Password}
+                      value={state.password}
                       size="small"
                       onChange={(e) =>
-                        setState({ ...state, Password: e.target.value })
+                        setState({ ...state, password: e.target.value })
                       }
                       endAdornment={
                         <InputAdornment position="end">
@@ -118,8 +178,12 @@ export default function LoginForm({}: Props) {
                       }
                       label="Password"
                     />
+                    {submitClicked && passwordError && (
+                      <FormHelperText>{passwordError}</FormHelperText>
+                    )}
                   </FormControl>
                 </Grid>
+
                 <Grid
                   item
                   xs={12}
@@ -162,7 +226,7 @@ export default function LoginForm({}: Props) {
                       width: '100%',
                       padding: '.5rem',
                     }}
-                    className="btn-small"
+                    className="btn-login"
                     type="submit"
                     disabled={isLoading}
                     variant="contained"
@@ -175,6 +239,13 @@ export default function LoginForm({}: Props) {
           </Paper>
         </Grid>
       </Grid>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+        message={snackbarMessage}
+      />
     </Box>
   );
 }
+     

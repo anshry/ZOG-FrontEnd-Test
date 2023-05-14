@@ -4,6 +4,7 @@ import { OpenInNew } from '@mui/icons-material';
 export default function LoginContent() {
   return (
     <Box
+      data-testid="login-content"
       sx={{
         alignItems: 'center',
         display: 'flex',

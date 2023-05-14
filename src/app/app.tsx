@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import Login from 'src/components/login/login';
+import Login from 'src/components/login/Login';
 import styles from './app.module.scss';
 
 import { QueryClient, QueryClientProvider } from 'react-query';

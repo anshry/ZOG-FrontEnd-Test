@@ -10,7 +10,12 @@ This is a simple login page for a frontend test built with React, Vite, and Nx. 
 ## Getting Started
 
 1. Clone the repository:
+To clone the project from GitHub, run the following command:
 ```git clone https://github.com/anshry/ZOG-FrontEnd-Test.git```
+To clone the project from GitLab, run the following command:
+```git clone https://gitlab.com/anshry/ZOG-FrontEnd-Test.git```
+To clone the project from Bitbucket, run the following command:
+```git clone https://bitbucket.org/raincember/zog-frontend-test.git```
 2. Change the current directory to the project folder:
 ```cd login-app```
 2. Install the dependencies:

@@ -6,7 +6,8 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "lint": "nx lint"
+    "lint": "nx lint",
+    "vercel-build": "nx build login-app --configuration=production"
   },
   "private": true,
   "dependencies": {
@@ -57,7 +58,7 @@
     "react-test-renderer": "18.2.0",
     "sass": "^1.55.0",
     "typescript": "~5.0.2",
-    "vite": "^4.3.4",
+    "vite": "^4.3.5",
     "vite-plugin-eslint": "^1.8.1",
     "vite-tsconfig-paths": "^4.0.2",
     "vitest": "^0.31.0"

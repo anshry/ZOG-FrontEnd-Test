@@ -8,9 +8,11 @@ import {
   IconButton,
   InputAdornment,
   InputLabel,
+  Link,
   OutlinedInput,
   Paper,
   Snackbar,
+  Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
@@ -81,7 +83,7 @@ export default function LoginForm() {
         setSnackbarMessage(error.message);
         setSnackbarOpen(true);
       }
-    }    
+    }
   };
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -192,14 +194,17 @@ export default function LoginForm() {
                   sx={{ paddingTop: 0 }}
                   marginBottom={{ xs: 1.5, md: 3 }}
                 >
-                  <Button
+                  <Typography
+                    component={Link}
+                    href="#"
                     sx={{
-                      textTransform: 'none',
+                      textDecoration: 'none',
+                      cursor: 'pointer',
                     }}
                     className="btn-forgot-password"
                   >
                     Forgot password?
-                  </Button>
+                  </Typography>
                 </Grid>
                 <Grid
                   item
@@ -208,16 +213,18 @@ export default function LoginForm() {
                 >
                   <p className="text-new-user">
                     New user?
-                    <Button
+                    <Typography
+                      component={Link}
+                      href="#"
                       sx={{
                         marginLeft: 0.8,
-                        padding: 0,
-                        textTransform: 'none',
+                        textDecoration: 'none',
+                        cursor: 'pointer',
                       }}
                       className="text-new-user"
                     >
                       Create Account
-                    </Button>
+                    </Typography>
                   </p>
                 </Grid>
                 <Grid item xs={3}>
@@ -250,4 +257,3 @@ export default function LoginForm() {
     </Box>
   );
 }
-     

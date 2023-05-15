@@ -151,11 +151,6 @@ export default function LoginForm() {
                       label="Email"
                       value={state.email}
                       size="small"
-                      inputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start"></InputAdornment>
-                        ),
-                      }}
                       onChange={(e) =>
                         setState({ ...state, email: e.target.value })
                       }
@@ -182,11 +177,6 @@ export default function LoginForm() {
                       type={showPassword ? 'text' : 'password'}
                       value={state.password}
                       size="small"
-                      inputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">kg</InputAdornment>
-                        ),
-                      }}
                       onChange={(e) =>
                         setState({ ...state, password: e.target.value })
                       }

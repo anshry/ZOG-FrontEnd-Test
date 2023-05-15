@@ -12,6 +12,7 @@ import {
   OutlinedInput,
   Paper,
   Snackbar,
+  TextField,
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
@@ -112,6 +113,7 @@ export default function LoginForm() {
         display: 'flex',
         height: '100%',
       }}
+      className="login-form-content"
       padding={{ xs: '1rem', md: '3rem' }}
     >
       <Grid container justifyContent="center">
@@ -149,6 +151,11 @@ export default function LoginForm() {
                       label="Email"
                       value={state.email}
                       size="small"
+                      inputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start"></InputAdornment>
+                        ),
+                      }}
                       onChange={(e) =>
                         setState({ ...state, email: e.target.value })
                       }
@@ -175,6 +182,11 @@ export default function LoginForm() {
                       type={showPassword ? 'text' : 'password'}
                       value={state.password}
                       size="small"
+                      inputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">kg</InputAdornment>
+                        ),
+                      }}
                       onChange={(e) =>
                         setState({ ...state, password: e.target.value })
                       }
